@@ -1,78 +1,83 @@
 # 🧬 ResearchMind — Autonomous AI Scientist
 
-[![Live Demo](https://img.shields.io/badge/🤗%20Live%20Demo-HuggingFace-blue)](https://huggingface.co/spaces/Vi-bha/ResearchMind)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Vi-bha/ResearchMind/blob/main/ResearchMind.ipynb)
+[![HuggingFace Demo](https://img.shields.io/badge/🤗%20Demo-Live-blue)](https://huggingface.co/spaces/Vi-bha/ResearchMind)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-> Autonomous AI system that fetches research papers from PubMed, performs RAG-based analysis, generates novel hypotheses, designs experiments and produces publication-style research proposals — with zero human intervention.
+Autonomous 5-stage AI research pipeline that queries PubMed's 35M+ papers,
+performs RAG-based literature analysis, generates novel hypotheses, designs
+experiments, and produces publication-style research proposals — with zero
+human intervention.
 
-## 🚀 Autonomous Pipeline
+---
+
+## Pipeline
+
 ```
 Topic Input
-    → 🔍 PubMed Fetch (35M+ papers)
-        → 🧠 RAG Analysis (FAISS + SentenceTransformers)
-            → 💡 Hypothesis Generation (Groq LLaMA 3.1)
-                → 🧪 Experiment Design
-                    → 📝 Research Proposal Output
+  → Stage 1: PubMed Fetch      (35M+ papers, structured metadata)
+  → Stage 2: RAG Indexing      (FAISS + all-MiniLM-L6-v2 embeddings)
+  → Stage 3: Hypothesis Gen    (Groq LLaMA 3.1, top-3 semantic retrieval)
+  → Stage 4: Experiment Design (dataset, methodology, metrics, timeline)
+  → Stage 5: Research Report   (publication-style proposal + peer critique)
 ```
 
-## ✨ Features
+## Folder Structure
 
-| Step | Feature | Description |
-|------|---------|-------------|
-| 1 | PubMed Search | Auto-fetches top papers for any topic |
-| 2 | Literature Analysis | RAG pipeline summarizes key findings |
-| 3 | Hypothesis Generation | LLM generates novel, testable hypotheses |
-| 4 | Experiment Design | Dataset, methodology, timeline, controls |
-| 5 | Research Proposal | Publication-style output with peer review |
+```
+ResearchMind/
+├── app.py            ← Gradio UI entry point
+├── pipeline.py       ← Core autonomous research logic
+├── requirements.txt
+└── README.md
+```
 
-## 🛠️ Tech Stack
+## Quickstart
 
-| Component | Technology |
-|-----------|------------|
-| Paper Source | PubMed API (35M+ papers, no rate limit) |
-| Vector Store | FAISS |
-| Embeddings | SentenceTransformers (all-MiniLM-L6-v2) |
-| LLM | Groq LLaMA 3.1 (8B Instant) |
-| UI | Gradio |
-
-## ⚙️ How to Run
 ```bash
-# Install dependencies
-pip install faiss-cpu sentence-transformers groq gradio requests
+git clone https://github.com/Vi-bha/ResearchMind
+cd ResearchMind
+pip install -r requirements.txt
 
-# Set your Groq API key (free at console.groq.com)
-export GROQ_API_KEY="your_key_here"
-
-# Run
+export GROQ_API_KEY=your_key_here   # free at console.groq.com
 python app.py
 ```
 
-Or open directly in Google Colab using the badge above.
+Open `http://localhost:7860` in your browser.
 
-## 📦 Requirements
-```
-groq
-faiss-cpu
-sentence-transformers
-gradio
-requests
-```
+## Tech Stack
 
-## 💡 Example Output
+| Component | Technology |
+|-----------|-----------|
+| Paper Source | PubMed API (35M+ papers) |
+| Vector Store | FAISS IndexFlatL2 |
+| Embeddings | SentenceTransformers all-MiniLM-L6-v2 (384-dim) |
+| LLM | Groq LLaMA 3.1 8B Instant |
+| UI | Gradio 4.x |
 
-**Input topic:** `large language models medical imaging`
+## Example Output
+
+**Input:** `large language models medical imaging`
 
 **Output includes:**
-- 5 fetched papers from PubMed (2024–2025)
-- RAG-based literature summary
-- 3 novel hypotheses
-- Full experiment design with methodology
-- Publication-style research proposal
+- 5 fetched PubMed papers (2023–2025) with metadata
+- RAG-based literature summary with identified research gaps
+- Novel, testable hypothesis with rationale
+- Experiment design with dataset, architecture, metrics, timeline
+- Peer critique with feasibility score
+- Full publication-style research proposal (~1,500 words)
 
-## 🔗 Links
-- 🤗 Live Demo: [huggingface.co/spaces/Vi-bha/ResearchMind](https://huggingface.co/spaces/Vi-bha/ResearchMind)
-- 🔍 PaperLens: [huggingface.co/spaces/Vi-bha/PaperLens](https://huggingface.co/spaces/Vi-bha/PaperLens)
-- 🔬 MedLens: [huggingface.co/spaces/Vi-bha/MedLens](https://huggingface.co/spaces/Vi-bha/MedLens)
+## Related Projects
 
----
-*Built by Vibhavari Tummewar | MTech Advanced Computing, MANIT Bhopal*
+| Project | Description | Demo |
+|---------|-------------|------|
+| [PaperLens](https://github.com/Vi-bha/PaperLens) | RAG pipeline for research paper Q&A | [🤗 Live](https://huggingface.co/spaces/Vi-bha/PaperLens) |
+| [MedLens](https://github.com/Vi-bha/MedLens) | Multimodal AI for prostate MRI analysis | [🤗 Live](https://huggingface.co/spaces/Vi-bha/MedLens) |
+
+## Author
+
+**Vibhavari Tummewar** — M.Tech Advanced Computing, MANIT Bhopal
+Scopus-indexed researcher in LLM-assisted medical AI systems.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/vibhavari-tummewar)
+[![HuggingFace](https://img.shields.io/badge/🤗-Vi--bha-yellow)](https://huggingface.co/Vi-bha)
